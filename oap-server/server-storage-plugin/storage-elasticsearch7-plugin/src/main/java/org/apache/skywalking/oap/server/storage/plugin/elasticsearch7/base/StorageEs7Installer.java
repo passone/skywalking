@@ -35,6 +35,7 @@ public class StorageEs7Installer extends StorageEsInstaller {
         super(moduleManager, config);
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     protected Map<String, Object> createMapping(Model model) {
         Map<String, Object> mapping = super.createMapping(model);

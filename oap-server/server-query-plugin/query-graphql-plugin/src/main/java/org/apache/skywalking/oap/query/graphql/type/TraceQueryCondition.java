@@ -20,9 +20,12 @@ package org.apache.skywalking.oap.query.graphql.type;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.skywalking.oap.server.core.analysis.manual.segment.SpanTag;
 import org.apache.skywalking.oap.server.core.query.entity.Pagination;
 import org.apache.skywalking.oap.server.core.query.entity.QueryOrder;
 import org.apache.skywalking.oap.server.core.query.entity.TraceState;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -38,4 +41,5 @@ public class TraceQueryCondition {
     private TraceState traceState;
     private QueryOrder queryOrder;
     private Pagination paging;
+    private List<SpanTag> tags;
 }

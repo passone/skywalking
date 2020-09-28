@@ -21,6 +21,7 @@ package org.apache.skywalking.oap.server.core.storage.query;
 import java.io.IOException;
 import java.util.List;
 import org.apache.skywalking.oap.server.core.analysis.manual.segment.SegmentRecord;
+import org.apache.skywalking.oap.server.core.analysis.manual.segment.SpanTag;
 import org.apache.skywalking.oap.server.core.query.entity.QueryOrder;
 import org.apache.skywalking.oap.server.core.query.entity.Span;
 import org.apache.skywalking.oap.server.core.query.entity.TraceBrief;
@@ -39,4 +40,21 @@ public interface ITraceQueryDAO extends Service {
      * This method gives more flexible for unnative
      */
     List<Span> doFlexibleTraceQuery(String traceId) throws IOException;
+
+    default TraceBrief queryBasicTraces(long startSecondTB,
+                                long endSecondTB,
+                                long minDuration,
+                                long maxDuration,
+                                String endpointName,
+                                int serviceId,
+                                int serviceInstanceId,
+                                int endpointId,
+                                String traceId,
+                                int limit,
+                                int from,
+                                TraceState traceState,
+                                QueryOrder queryOrder,
+                                final List<SpanTag> tags) throws IOException {
+        return queryBasicTraces(startSecondTB, endSecondTB, minDuration, maxDuration, endpointName, serviceId, serviceInstanceId, endpointId, traceId, limit, from, traceState, queryOrder);
+    }
 }

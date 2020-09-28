@@ -24,6 +24,7 @@ import org.apache.skywalking.apm.network.language.agent.UniqueId;
 import org.apache.skywalking.oap.server.core.Const;
 import org.apache.skywalking.oap.server.core.CoreModule;
 import org.apache.skywalking.oap.server.core.analysis.TimeBucket;
+import org.apache.skywalking.oap.server.core.analysis.manual.segment.SpanTag;
 import org.apache.skywalking.oap.server.core.cache.EndpointInventoryCache;
 import org.apache.skywalking.oap.server.core.source.Segment;
 import org.apache.skywalking.oap.server.core.source.SourceReceiver;
@@ -83,6 +84,9 @@ public class SegmentSpanListener implements FirstSpanListener, EntrySpanListener
         segment.setTimeBucket(timeBucket);
         segment.setDataBinary(segmentCoreInfo.getDataBinary());
         segment.setVersion(segmentCoreInfo.getVersion().number());
+        segment.setTags(spanDecorator.getAllTags().stream()
+                .map(e -> new SpanTag(e.getKey(), e.getValue()))
+                .collect(Collectors.toList()));
 
         firstEndpointId = spanDecorator.getOperationNameId();
         firstEndpointName = spanDecorator.getOperationName();
